@@ -72,6 +72,10 @@ def transcribe(
             warnings.warn("FP16 is not supported on CPU; using FP32 instead")
             dtype = torch.float32
 
+    elif model.device == torch.device("mps"):
+        warnings.warn("FP16 is not supported on MPS; using FP32 instead")
+        dtype = torch.float32
+
     if dtype == torch.float32:
         decode_options["fp16"] = False
 
